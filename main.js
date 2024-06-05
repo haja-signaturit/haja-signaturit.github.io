@@ -13,7 +13,6 @@ document.querySelector("#app").innerHTML = `
   </div>
 `;
 
-// on ready get the queryParams hostUrl and signerId
 document.addEventListener("DOMContentLoaded", () => {
   const url = new URL(window.location.href);
   const hostUrl = url.searchParams.get("hostUrl");
@@ -35,12 +34,15 @@ function generateIframe() {
     redirectionMode: "IN"
   };
   const signerId = document.querySelector("#signatureId").value;
-  // create new url and set its queryParams hostUrl and signerId
   const url = new URL(window.location.href);
+  
   url.searchParams.set("hostUrl", hostUrl);
   url.searchParams.set("signerId", signerId);
-  // set the new url to the current window
   window.history.pushState({}, "", url);
+
+  window.addEventListener("pdsEvent", (e) => {
+    console.log("pdsEvent", e.detail);
+  });
 
   universignSigInit(
     "iframeContainerId",
