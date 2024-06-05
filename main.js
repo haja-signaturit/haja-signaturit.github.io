@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const url = new URL(window.location.href);
   const hostUrl = url.searchParams.get("hostUrl");
   const signerId = url.searchParams.get("signerId");
+  if (!hostUrl || !signerId) {
+    return;
+  }
   document.querySelector("#hostUrl").value = hostUrl;
   document.querySelector("#signatureId").value = signerId;
 });
